@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: darkslategray;
+        }
+        h1 {
+            font-size: 50px;
+            display: flex;
+            justify-content: center;
+        }
+        input {
+            background-color: darkgrey;
+            border-radius: 5px;
+        }
+        .über {
+
+        }
+        .main {
+            margin: 60px;
+            display: flex;
+            justify-content: left;
+        }
+        .TAS_calc {
+            font-size: 20px;
+            margin: 10px;
+            width: 200px;
+            input {
+                margin: 5px;
+                width: 75px;
+            }
+            button {
+                margin: 5px;
+                width: 75px;
+                background-color: #558585;
+                border-radius: 5px;
+            }
+        }
+    </style>
+    <script>
+        function IAS_TAS_calc() {
+            ias = document.getElementsByClassName('IAS-TAS_input')[0].value;
+            alt = document.getElementsByClassName('IAS-TAS_alt_input')[0].value;
+            temp = document.getElementsByClassName('IAS-TAS_temp_input')[0].value;
+            qnh = document.getElementsByClassName('IAS-TAS_qnh_input')[0].value;
+            alert(qnh)
+            if (qnh != 1013) {
+                alt = alt + (1013 - qnh) * 27
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="über">
+    <h1>Calculators</h1>
+    </div>
+    <div class="main">
+        <div class="TAS_calc">
+            <p>IAS - TAS Calculator</p>
+            <input class="IAS-TAS_input" type="number", placeholder=" IAS">
+            <input class="IAS-TAS_alt_input", type="number", placeholder=" ALT">
+            <input class="IAS-TAS_temp_input", type="number", placeholder=" TEMP °C">
+            <input class="IAS-TAS_qnh_input", type="number", placeholder=" QNH/QNE">
+            <button class="IAS-TAS_button", onclick="IAS_TAS_calc()">Calculate</button>
+            <output class="IAS-TAS_output"></output>
+        </div>
+    </div>
+</body>
+</html>
