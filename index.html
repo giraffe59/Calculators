@@ -27,7 +27,22 @@
         }
         .TAS_calc {
             font-size: 20px;
-            margin: 10px;
+            margin: 20px;
+            width: 200px;
+            input {
+                margin: 5px;
+                width: 75px;
+            }
+            button {
+                margin: 5px;
+                width: 75px;
+                background-color: #558585;
+                border-radius: 5px;
+            }
+        }
+        .gs_calc {
+            font-size: 20px;
+            margin: 20px;
             width: 200px;
             input {
                 margin: 5px;
@@ -43,14 +58,37 @@
     </style>
     <script>
         function IAS_TAS_calc() {
-            ias = document.getElementsByClassName('IAS-TAS_input')[0].value;
-            alt = document.getElementsByClassName('IAS-TAS_alt_input')[0].value;
-            temp = document.getElementsByClassName('IAS-TAS_temp_input')[0].value;
-            qnh = document.getElementsByClassName('IAS-TAS_qnh_input')[0].value;
-            alert(qnh)
-            if (qnh != 1013) {
+            let ias = Number(document.getElementsByClassName('IAS-TAS_input')[0].value);
+            let alt = Number(document.getElementsByClassName('IAS-TAS_alt_input')[0].value);
+            let temp = Number(document.getElementsByClassName('IAS-TAS_temp_input')[0].value);
+            let qnh = Number(document.getElementsByClassName('IAS-TAS_qnh_input')[0].value);
+            if (qnh !== 1013) {
                 alt = alt + (1013 - qnh) * 27
             }
+            let tas = ias * Math.pow(1 - (0.000006875 * alt), -2.125);
+
+            let isa_temp = 15 - (1.98 * alt / 1000);
+            let temp_ratio = Math.sqrt((273.15 + temp) / (273.15 + isa_temp));
+
+            tas = tas * temp_ratio;
+            alert(tas)
+            Math.round(document.getElementsByClassName("IAS-TAS_output")[0].value = tas);
+        }
+        function GS_Calculator() {
+            let tas = Number(document.getElementsByClassName('gs_calc_tas')[0].value);
+            let ws = Number(document.getElementsByClassName('gs_calc_ws')[0].value);
+            let wd = Number(document.getElementsByClassName('gs_calc_wd')[0].value);
+            let heading = Number(document.getElementsByClassName('gs_calc_heading')[0].value);
+            let alpha
+
+            if (wd < heading) {alpha = Math.abs(heading - wd);}
+            else {alpha = Math.abs(wd - heading);}
+            if (alpha > 180) {alpha = 360 - alpha;}
+            let final_alpha = alpha * (Math.PI / 180);
+
+            let vorhalte = Math.sqrt(tas**2 - (ws * Math.sin(final_alpha))**2)
+            let gs = vorhalte - ws * Math.cos(final_alpha);
+            document.getElementsByClassName("gs_calc_output")[0].value = gs
         }
     </script>
 </head>
@@ -67,6 +105,15 @@
             <input class="IAS-TAS_qnh_input", type="number", placeholder=" QNH/QNE">
             <button class="IAS-TAS_button", onclick="IAS_TAS_calc()">Calculate</button>
             <output class="IAS-TAS_output"></output>
+        </div>
+        <div class="gs_calc">
+            <p>GS Calculator</p>
+            <input class="gs_calc_tas" type="number", placeholder=" TAS">
+            <input class="gs_calc_ws", type="number", placeholder=" WS">
+            <input class="gs_calc_wd", type="number", placeholder=" WD">
+            <input class="gs_calc_heading", type="number", placeholder=" heading">
+            <button class="gs_calc_button", onclick="GS_Calculator()">Calculate</button>
+            <output class="gs_calc_output"></output>
         </div>
     </div>
 </body>
