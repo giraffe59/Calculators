@@ -28,14 +28,15 @@
         .TAS_calc {
             font-size: 20px;
             margin: 20px;
-            width: 200px;
+            min-width: 200px;
+            max-width: 200px;
             input {
                 margin: 5px;
                 width: 75px;
             }
             button {
                 margin: 5px;
-                width: 75px;
+                width: 90px;
                 background-color: #558585;
                 border-radius: 5px;
             }
@@ -43,16 +44,37 @@
         .gs_calc {
             font-size: 20px;
             margin: 20px;
-            width: 200px;
+            min-width: 200px;
+            max-width: 200px;
             input {
                 margin: 5px;
                 width: 75px;
             }
             button {
                 margin: 5px;
-                width: 75px;
+                width: 90px;
                 background-color: #558585;
                 border-radius: 5px;
+            }
+        }
+        .swc_calc {
+            font-size: 20px;
+            margin: 20px;
+            min-width: 200px;
+            max-width: 200px;
+            input {
+                margin: 5px;
+                width: 75px;
+            }
+            button {
+                margin: 5px;
+                width: 90px;
+                background-color: #558585;
+                border-radius: 5px;
+            }
+            output {
+                width: 75px;
+                margin: 5px;
             }
         }
     </style>
@@ -87,8 +109,43 @@
             let final_alpha = alpha * (Math.PI / 180);
 
             let vorhalte = Math.sqrt(tas**2 - (ws * Math.sin(final_alpha))**2)
-            let gs = vorhalte - ws * Math.cos(final_alpha);
+            let gs = Math.round(vorhalte - ws * Math.cos(final_alpha));
             document.getElementsByClassName("gs_calc_output")[0].value = gs
+        }
+        function swccalc() {
+            let heading = Number(document.getElementsByClassName("swc_calc_heading")[0].value)
+            let ws = Number(document.getElementsByClassName("swc_calc_ws")[0].value)
+            let wd = Number(document.getElementsByClassName("swc_calc_wd")[0].value)
+
+            let alpha
+            let arrow
+            if (wd < heading) {
+                alpha = Math.abs(heading - wd);
+                if (heading - wd < 180) {
+                    arrow = "→ "
+                } else {
+                    arrow = "← "
+                }
+            }
+            else {
+                alpha = Math.abs(wd - heading);
+                if (wd - heading < 180) {
+                    arrow = "← "
+                }else {
+                    arrow = "→ "
+                }
+            }
+            if (alpha > 180) {alpha = 360 - alpha;}
+            let diviation = alpha * (Math.PI / 180);
+
+            let side_wind = Math.round(Math.sin(diviation) * ws * 100) / 100
+            let head_wind = Math.round(Math.cos(diviation) * ws * 100) / 100
+
+            const leftArrow = (arrow === "← ") ? arrow : "";
+            const rightArrow = (arrow === "→ ") ? arrow : "";
+
+            document.getElementsByClassName("swc_calc_output")[0].value = rightArrow + side_wind + leftArrow;
+            document.getElementsByClassName("swc_calc_ouptutt")[0].value = "↓ " + head_wind
         }
     </script>
 </head>
@@ -114,6 +171,15 @@
             <input class="gs_calc_heading", type="number", placeholder=" heading">
             <button class="gs_calc_button", onclick="GS_Calculator()">Calculate</button>
             <output class="gs_calc_output"></output>
+        </div>
+        <div class="swc_calc">
+            <p>Wind Component</p>
+            <input class="swc_calc_heading", type="number", placeholder=" heading">
+            <input class="swc_calc_ws", type="number", placeholder=" WS">
+            <input class="swc_calc_wd", type="number", placeholder="WD">
+            <button class="swd_calc_button", onclick="swccalc()">Calculate</button>
+            <output class="swc_calc_output"></output>
+            <output class="swc_calc_ouptutt"></output>
         </div>
     </div>
 </body>
