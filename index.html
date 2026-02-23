@@ -24,6 +24,9 @@
             margin: 60px;
             display: flex;
             justify-content: left;
+            flex-wrap: wrap;
+            gap: 40px;
+            width: 100%;
         }
         .TAS_calc {
             font-size: 20px;
@@ -77,6 +80,22 @@
                 margin: 5px;
             }
         }
+        .lvw_calc {
+            font-size: 20px;
+            margin: 20px;
+            min-width: 200px;
+            max-width: 200px;
+            input {
+                margin: 5px;
+                width: 75px;
+            }
+            button {
+                margin: 5px;
+                width: 90px;
+                background-color: #558585;
+                border-radius: 5px;
+            }
+        }
     </style>
     <script>
         function IAS_TAS_calc() {
@@ -93,8 +112,7 @@
             let temp_ratio = Math.sqrt((273.15 + temp) / (273.15 + isa_temp));
 
             tas = tas * temp_ratio;
-            alert(tas)
-            Math.round(document.getElementsByClassName("IAS-TAS_output")[0].value = tas);
+            document.getElementsByClassName("IAS-TAS_output")[0].value = Math.round(tas);
         }
         function GS_Calculator() {
             let tas = Number(document.getElementsByClassName('gs_calc_tas')[0].value);
@@ -147,6 +165,47 @@
             document.getElementsByClassName("swc_calc_output")[0].value = rightArrow + side_wind + leftArrow;
             document.getElementsByClassName("swc_calc_ouptutt")[0].value = "↓ " + head_wind
         }
+        function lvwCalc() {
+            let ws = Number(document.getElementsByClassName("lvw_calc_ws")[0].value);
+            let wd = Number(document.getElementsByClassName("lvw_calc_wd")[0].value);
+            let tas = Number(document.getElementsByClassName("lvw_calc_tas")[0].value);
+            let heading = Number(document.getElementsByClassName("lvw_calc_heading")[0].value);
+
+            if (heading === 360) heading = 0;
+
+            let alpha;
+            let add = false;
+
+            if (wd < heading) {
+                alpha = heading - wd;
+                if (alpha < 180) {
+                    add = false;
+                } else {
+                    alpha = 360 - alpha;
+                    add = true;
+                }
+            } else {
+                alpha = wd - heading;
+                if (alpha < 180) {
+                    add = true;
+                } else {
+                    alpha = 360 - alpha;
+                    add = false;
+                }
+            }
+            const diviation = alpha * (Math.PI / 180);
+            let wca = Math.asin(ws * Math.sin(diviation) / tas) * 180 / Math.PI;
+
+            let raw_h = (add) ? (heading + wca) : (heading - wca);
+            let final_heading = (raw_h % 360 + 360) % 360;
+            final_heading = Math.round(final_heading * 100) / 100;
+
+            let zeros = "";
+            if (final_heading < 10) { zeros = "00"; }
+            else if (final_heading < 100) { zeros = "0"; }
+
+            document.getElementsByClassName("lvw_calc_output")[0].value = zeros + final_heading;
+        }
     </script>
 </head>
 <body>
@@ -176,10 +235,19 @@
             <p>Wind Component</p>
             <input class="swc_calc_heading", type="number", placeholder=" heading">
             <input class="swc_calc_ws", type="number", placeholder=" WS">
-            <input class="swc_calc_wd", type="number", placeholder="WD">
+            <input class="swc_calc_wd", type="number", placeholder=" WD">
             <button class="swd_calc_button", onclick="swccalc()">Calculate</button>
             <output class="swc_calc_output"></output>
             <output class="swc_calc_ouptutt"></output>
+        </div>
+        <div class="lvw_calc">
+            <p>Wind correciton Angle</p>
+            <input class="lvw_calc_ws", type="number", placeholder=" WS">
+            <input class="lvw_calc_wd", type="number", placeholder=" WD">
+            <input class="lvw_calc_tas", type="number", placeholder=" TAS">
+            <input class="lvw_calc_heading", type="number", placeholder=" heading">
+            <button class="lvw_calc_button", onclick="lvwCalc()">Calculate</button>
+            <output class="lvw_calc_output"></output>
         </div>
     </div>
 </body>
