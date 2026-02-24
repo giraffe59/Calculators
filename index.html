@@ -3,32 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculators</title>
     <style>
         body {
             background-color: darkslategray;
         }
         h1 {
+            padding: 10px;
+            border-radius: 20px;
             font-size: 50px;
             display: flex;
             justify-content: center;
+            background-color: #1f3535;
         }
         input {
             background-color: darkgrey;
             border-radius: 5px;
+            text-align: center;
         }
-        .über {
-
+        div {
+            padding: 10px;
+            text-align: center;
+        }
+        output {
+            color: white;
+            display: block;
+            background-color: #4e4e4e;
+            min-height: 1.5em;
+            margin-left: auto;
+            margin-right: auto;
+            min-width: 70px;
+            padding-top: 0.3em;
+            padding-right: 7px;
+            padding-left: 7px;
+            width: auto;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 10px;
         }
         .main {
             margin: 60px;
             display: flex;
             justify-content: left;
+            @media screen and (max-width: 600px) {
+                justify-content: center;
+                margin: 0px;
+            }
             flex-wrap: wrap;
             gap: 40px;
             width: 100%;
         }
         .TAS_calc {
+            background-color: #326666;
+            border-radius: 10px;
             font-size: 20px;
             margin: 20px;
             min-width: 200px;
@@ -39,12 +66,14 @@
             }
             button {
                 margin: 5px;
-                width: 90px;
+                width: 85px;
                 background-color: #558585;
                 border-radius: 5px;
             }
         }
         .gs_calc {
+            background-color: #326666;
+            border-radius: 10px;
             font-size: 20px;
             margin: 20px;
             min-width: 200px;
@@ -55,12 +84,14 @@
             }
             button {
                 margin: 5px;
-                width: 90px;
+                width: 85px;
                 background-color: #558585;
                 border-radius: 5px;
             }
         }
         .swc_calc {
+            background-color: #326666;
+            border-radius: 10px;
             font-size: 20px;
             margin: 20px;
             min-width: 200px;
@@ -71,16 +102,17 @@
             }
             button {
                 margin: 5px;
-                width: 90px;
+                width: 85px;
                 background-color: #558585;
                 border-radius: 5px;
             }
             output {
-                width: 75px;
-                margin: 5px;
+                display: inline-block;
             }
         }
         .lvw_calc {
+            background-color: #326666;
+            border-radius: 10px;
             font-size: 20px;
             margin: 20px;
             min-width: 200px;
@@ -91,10 +123,34 @@
             }
             button {
                 margin: 5px;
-                width: 90px;
+                width: 85px;
                 background-color: #558585;
                 border-radius: 5px;
             }
+        }
+        .tod_calc {
+            background-color: #326666;
+            border-radius: 10px;
+            font-size: 20px;
+            margin: 20px;
+            min-width: 200px;
+            max-width: 200px;
+            input {
+                margin: 5px;
+                width: 75px;
+            }
+            button {
+                margin: 5px;
+                width: 85px;
+                background-color: #558585;
+                border-radius: 5px;
+            }
+            output {
+                display: inline-block;
+            }
+        }
+        .description {
+            font-size: 15px;
         }
     </style>
     <script>
@@ -206,6 +262,17 @@
 
             document.getElementsByClassName("lvw_calc_output")[0].value = zeros + final_heading;
         }
+        function todCalc() {
+            let gs = Number(document.getElementsByClassName("tod_calc_gs")[0].value) - 20
+            let ftd = Number(document.getElementsByClassName("tod_calc_ftd")[0].value)
+            let ddr = Number(document.getElementsByClassName("tod_calc_ddr")[0].value)
+
+            const minutes_to_descent = ftd / ddr
+
+            const nmMinute = gs / 60
+
+            document.getElementsByClassName("tod_calc_output")[0].value = Math.round(minutes_to_descent * nmMinute * 100) / 100 + "NM To descent"
+        }
     </script>
 </head>
 <body>
@@ -248,6 +315,14 @@
             <input class="lvw_calc_heading", type="number", placeholder=" heading">
             <button class="lvw_calc_button", onclick="lvwCalc()">Calculate</button>
             <output class="lvw_calc_output"></output>
+        </div>
+        <div class="tod_calc">
+            <p>Top Of Descent</p>
+            <input class="tod_calc_gs", type="number", placeholder="GS">
+            <input class="tod_calc_ftd", type="number", placeholder=" Δ ALT (ft)">
+            <input class="tod_calc_ddr", type="number", placeholder="ft/m">
+            <button class="tod_calc_button", onclick="todCalc()">Calculator</button>
+            <output class="tod_calc_output"></output>
         </div>
     </div>
 </body>
