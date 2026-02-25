@@ -52,7 +52,7 @@
             justify-content: left;
             @media screen and (max-width: 600px) {
                 justify-content: center;
-                margin: 0px;
+                margin: 0;
             }
             flex-wrap: wrap;
             gap: 40px;
@@ -284,46 +284,56 @@
     <div class="main">
         <div class="TAS_calc">
             <p>IAS - TAS Calculator</p>
-            <input class="IAS-TAS_input" type="number", placeholder=" IAS">
-            <input class="IAS-TAS_alt_input", type="number", placeholder=" ALT">
-            <input class="IAS-TAS_temp_input", type="number", placeholder=" TEMP °C">
-            <input class="IAS-TAS_qnh_input", type="number", placeholder=" QNH/QNE">
-            <button class="IAS-TAS_button", onclick="IAS_TAS_calc()">Calculate</button>
+            <label>
+                <input class="IAS-TAS_input" type="number" placeholder=" IAS">
+                <input class="IAS-TAS_alt_input" type="number" placeholder=" ALT">
+                <input class="IAS-TAS_temp_input" type="number" placeholder=" TEMP °C">
+                <input class="IAS-TAS_qnh_input" type="number" placeholder=" QNH/QNE">
+                <button class="IAS-TAS_button" onclick="IAS_TAS_calc()">Calculate</button>
+            </label>
             <output class="IAS-TAS_output"></output>
         </div>
         <div class="gs_calc">
             <p>GS Calculator</p>
-            <input class="gs_calc_tas" type="number", placeholder=" TAS">
-            <input class="gs_calc_ws", type="number", placeholder=" WS">
-            <input class="gs_calc_wd", type="number", placeholder=" WD">
-            <input class="gs_calc_heading", type="number", placeholder=" heading">
-            <button class="gs_calc_button", onclick="GS_Calculator()">Calculate</button>
+            <label>
+                <input class="gs_calc_tas" type="number" placeholder=" TAS">
+                <input class="gs_calc_ws" type="number" placeholder=" WS">
+                <input class="gs_calc_wd" type="number" placeholder=" WD">
+                <input class="gs_calc_heading" type="number" placeholder=" heading">
+                <button class="gs_calc_button" onclick="GS_Calculator()">Calculate</button>
+            </label>
             <output class="gs_calc_output"></output>
         </div>
         <div class="swc_calc">
             <p>Wind Component</p>
-            <input class="swc_calc_heading", type="number", placeholder=" heading">
-            <input class="swc_calc_ws", type="number", placeholder=" WS">
-            <input class="swc_calc_wd", type="number", placeholder=" WD">
-            <button class="swd_calc_button", onclick="swccalc()">Calculate</button>
+            <label>
+                <input class="swc_calc_heading" type="number" placeholder=" heading">
+                <input class="swc_calc_ws" type="number" placeholder=" WS">
+                <input class="swc_calc_wd" type="number" placeholder=" WD">
+                <button class="swd_calc_button" onclick="swccalc()">Calculate</button>
+            </label>
             <output class="swc_calc_output"></output>
             <output class="swc_calc_ouptutt"></output>
         </div>
         <div class="lvw_calc">
             <p>Wind correciton Angle</p>
-            <input class="lvw_calc_ws", type="number", placeholder=" WS">
-            <input class="lvw_calc_wd", type="number", placeholder=" WD">
-            <input class="lvw_calc_tas", type="number", placeholder=" TAS">
-            <input class="lvw_calc_heading", type="number", placeholder=" heading">
-            <button class="lvw_calc_button", onclick="lvwCalc()">Calculate</button>
+            <label>
+                <input class="lvw_calc_ws" type="number" placeholder=" WS">
+                <input class="lvw_calc_wd" type="number" placeholder=" WD">
+                <input class="lvw_calc_tas" type="number" placeholder=" TAS">
+                <input class="lvw_calc_heading" type="number" placeholder=" heading">
+                <button class="lvw_calc_button" onclick="lvwCalc()">Calculate</button>
+            </label>
             <output class="lvw_calc_output"></output>
         </div>
         <div class="tod_calc">
             <p>Top Of Descent</p>
-            <input class="tod_calc_gs", type="number", placeholder="GS">
-            <input class="tod_calc_ftd", type="number", placeholder=" Δ ALT (ft)">
-            <input class="tod_calc_ddr", type="number", placeholder="ft/m">
-            <button class="tod_calc_button", onclick="todCalc()">Calculator</button>
+            <label>
+                <input class="tod_calc_gs" type="number" placeholder="GS">
+                <input class="tod_calc_ftd" type="number" placeholder=" Δ ALT (ft)">
+                <input class="tod_calc_ddr" type="number" placeholder="ft/m">
+                <button class="tod_calc_button" onclick="todCalc()">Calculator</button>
+            </label>
             <output class="tod_calc_output"></output>
         </div>
     </div>
