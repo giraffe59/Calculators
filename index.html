@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculators</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         body {
+            font-family: "Roboto Light", sans-serif;
             background-color: darkslategray;
         }
         h1 {
@@ -22,13 +26,13 @@
             text-align: center;
         }
         div {
-            padding: 10px;
+            font-weight: bold;
             text-align: center;
         }
         output {
             color: white;
             display: block;
-            background-color: #4e4e4e;
+            background-color: #274242;
             min-height: 1.5em;
             margin-left: auto;
             margin-right: auto;
@@ -36,10 +40,11 @@
             padding-top: 0.3em;
             padding-right: 7px;
             padding-left: 7px;
-            width: auto;
+            width: 75px;
             border-radius: 5px;
             text-align: center;
             margin-top: 10px;
+            margin-bottom: 10px;
         }
         .main {
             margin: 60px;
@@ -56,7 +61,7 @@
         .TAS_calc {
             background-color: #326666;
             border-radius: 10px;
-            font-size: 20px;
+            font-size: 18px;
             margin: 20px;
             min-width: 200px;
             max-width: 200px;
@@ -74,7 +79,7 @@
         .gs_calc {
             background-color: #326666;
             border-radius: 10px;
-            font-size: 20px;
+            font-size: 18px;
             margin: 20px;
             min-width: 200px;
             max-width: 200px;
@@ -92,7 +97,7 @@
         .swc_calc {
             background-color: #326666;
             border-radius: 10px;
-            font-size: 20px;
+            font-size: 18px;
             margin: 20px;
             min-width: 200px;
             max-width: 200px;
@@ -113,7 +118,7 @@
         .lvw_calc {
             background-color: #326666;
             border-radius: 10px;
-            font-size: 20px;
+            font-size: 18px;
             margin: 20px;
             min-width: 200px;
             max-width: 200px;
@@ -131,7 +136,7 @@
         .tod_calc {
             background-color: #326666;
             border-radius: 10px;
-            font-size: 20px;
+            font-size: 18px;
             margin: 20px;
             min-width: 200px;
             max-width: 200px;
@@ -148,9 +153,6 @@
             output {
                 display: inline-block;
             }
-        }
-        .description {
-            font-size: 15px;
         }
     </style>
     <script>
@@ -263,15 +265,15 @@
             document.getElementsByClassName("lvw_calc_output")[0].value = zeros + final_heading;
         }
         function todCalc() {
-            let gs = Number(document.getElementsByClassName("tod_calc_gs")[0].value) - 20
-            let ftd = Number(document.getElementsByClassName("tod_calc_ftd")[0].value)
-            let ddr = Number(document.getElementsByClassName("tod_calc_ddr")[0].value)
+            let gs = Number(document.getElementsByClassName("tod_calc_gs")[0].value) - 20;
+            let ftd = Number(document.getElementsByClassName("tod_calc_ftd")[0].value);
+            let ddr = Number(document.getElementsByClassName("tod_calc_ddr")[0].value);
 
-            const minutes_to_descent = ftd / ddr
+            const minutes_to_descent = ftd / ddr;
 
-            const nmMinute = gs / 60
+            const nmMinute = gs / 60;
 
-            document.getElementsByClassName("tod_calc_output")[0].value = Math.round(minutes_to_descent * nmMinute * 100) / 100 + "NM To descent"
+            document.getElementsByClassName("tod_calc_output")[0].value = Math.round(minutes_to_descent * nmMinute * 100) / 100 + "NM To descent";
         }
     </script>
 </head>
