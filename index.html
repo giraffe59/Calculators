@@ -25,6 +25,18 @@
             border-radius: 5px;
             text-align: center;
         }
+        input {
+            /* ... deine bisherigen styles ... */
+            -webkit-appearance: none; /* Deaktiviert iOS-Standard-Design */
+            appearance: none;
+            opacity: 1; /* Stellt sicher, dass der Text nicht blass verschwindet */
+         }
+
+          /* Speziell für den Placeholder in Safari */
+        input::-webkit-input-placeholder {
+             color: #444; /* Wähle eine sichtbare Farbe */
+             line-height: normal !important; /* Verhindert vertikales Verschwinden */
+        }
         div {
             font-weight: bold;
             text-align: center;
